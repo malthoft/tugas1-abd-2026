@@ -227,10 +227,19 @@ Buka JupyterLab pada `http://localhost:8888/lab`. Konfigurasi Dockerfile menjala
 
 ## AI Disclosure Statement
 
-Isi bagian ini sebelum pengumpulan akhir.
+> Alat AI yang digunakan: model DeepSeek V4.1 Flash, dijalankan lewat Hermes
+> Agent di desktop.
 
-> Alat AI yang digunakan: [nama alat].
->
-> Bagian yang dibantu: [contoh: penjelasan error Polars atau review dokumentasi].
->
-> Verifikasi yang dilakukan: [contoh: menjalankan ulang kode, memeriksa dokumentasi resmi, dan memahami setiap cell].
+> Bagian yang dibantu: penulisan awal skrip pengunduh
+> `src/download_dataset.py` termasuk penanganan unduhan yang terputus di tengah
+> jalan, penyusunan kerangka dan narasi notebook `01_data_profiling.ipynb`, dan
+> penelusuran error waktu notebook dijalankan dari folder `notebooks/` (path
+> relatif tidak ketemu dan kernel Jupyter yang tidak memakai virtualenv).
+
+> Verifikasi yang dilakukan: menjalankan ulang seluruh notebook dari awal
+> setelah tiap perubahan, mencocokkan jumlah baris (1.200.000) dan checksum
+> SHA-256 berkas hasil unduhan, memeriksa sendiri ukuran shard asli
+> (4.845.913.669 byte) dan lisensi dataset di halaman Hugging Face, menjalankan
+> perintah `compileall` serta pemeriksaan JSON notebook yang dipakai CI, dan
+> membaca dokumentasi Polars dan DuckDB untuk tiap fungsi yang dipakai supaya
+> setiap cell bisa dijelaskan.
