@@ -227,19 +227,16 @@ Buka JupyterLab pada `http://localhost:8888/lab`. Konfigurasi Dockerfile menjala
 
 ## AI Disclosure Statement
 
-> Alat AI yang digunakan: model DeepSeek V4.1 Flash, dijalankan lewat Hermes
-> Agent di desktop.
+> Alat AI yang digunakan: DeepSeek V4.1 Flash.
 
-> Bagian yang dibantu: penulisan awal skrip pengunduh
-> `src/download_dataset.py` termasuk penanganan unduhan yang terputus di tengah
-> jalan, penyusunan kerangka dan narasi notebook `01_data_profiling.ipynb`, dan
-> penelusuran error waktu notebook dijalankan dari folder `notebooks/` (path
-> relatif tidak ketemu dan kernel Jupyter yang tidak memakai virtualenv).
+> Bagian yang dibantu: membantu menyarikan dataset yang cocok untuk tugas ini
+> (membandingkan beberapa kandidat lalu memilih FineWeb-2 konfigurasi `ind_Latn`
+> karena jumlah barisnya memenuhi syarat) serta membantu mengarahkan tutorial
+> cara menggunakan Docker untuk menjalankan JupyterLab pada repositori ini.
 
-> Verifikasi yang dilakukan: menjalankan ulang seluruh notebook dari awal
-> setelah tiap perubahan, mencocokkan jumlah baris (1.200.000) dan checksum
-> SHA-256 berkas hasil unduhan, memeriksa sendiri ukuran shard asli
-> (4.845.913.669 byte) dan lisensi dataset di halaman Hugging Face, menjalankan
-> perintah `compileall` serta pemeriksaan JSON notebook yang dipakai CI, dan
-> membaca dokumentasi Polars dan DuckDB untuk tiap fungsi yang dipakai supaya
-> setiap cell bisa dijelaskan.
+> Verifikasi yang dilakukan: mengecek ulang halaman dataset pada Hugging Face
+> untuk memastikan konfigurasi `ind_Latn` tersedia dan mencatat ukuran aslinya,
+> menjalankan container Docker sendiri lalu membuka JupyterLab pada
+> `http://localhost:8888/lab`, menjalankan ulang notebook dari awal dan
+> memeriksa tiap output, serta mencocokkan jumlah baris dataset dengan syarat
+> tugas yaitu lebih dari 1 juta baris.
