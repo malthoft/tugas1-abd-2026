@@ -131,20 +131,32 @@ http://localhost:8888/lab
 
 ## Menyiapkan Dataset
 
-1. Letakkan dataset yang akan digunakan pada folder:
+Dataset yang dipakai adalah kumpulan berita politik dari portal berita
+Indonesia. Penyimpanannya mengikuti aturan tugas:
 
 ```text
-data/raw/
+data/raw/berita_politik/          <- 17 berkas Parquet asli, tidak diubah
+data/processed/berita_politik_1_2jt.parquet
+                                  <- tabel analisis, 1.200.000 baris x 10 kolom, 968,4 MB
 ```
 
-2. Buka notebook profiling atau notebook yang digunakan.
-3. Sesuaikan nilai variabel `DATA_PATH` agar mengarah ke file dataset yang Anda gunakan.
+Unduh dan susun keduanya dengan:
 
-Contoh:
-
-```python
-DATA_PATH = "data/raw/nama_dataset.csv"
+```bash
+python src/download_dataset.py
 ```
+
+Skrip itu mengunduh berkas aslinya dari Hugging Face ke `data/raw/` (3.989 MB,
+hanya sekali) tanpa mengubah isinya, lalu menyusun tabel analisis ke
+`data/processed/`. Rincian sumber, ukuran, dan arti kolomnya ada di
+`data/README.md`.
+
+Notebook membaca tabel analisisnya lewat modul `src/dataset.py`, jadi tidak ada
+nilai `DATA_PATH` yang perlu diubah manual. Kalau berkasnya belum ada, jalankan
+skrip pengunduh dulu.
+
+Kedua folder itu tidak di-commit. `.gitignore` sudah menutup `data/raw/*` dan
+`data/processed/*`, yang masuk Git cuma `data/README.md`.
 
 ---
 
@@ -227,10 +239,17 @@ Buka JupyterLab pada `http://localhost:8888/lab`. Konfigurasi Dockerfile menjala
 
 ## AI Disclosure Statement
 
-Isi bagian ini sebelum pengumpulan akhir.
+> Alat AI yang digunakan: DeepSeek V4.1 Flash.
 
-> Alat AI yang digunakan: [nama alat].
->
-> Bagian yang dibantu: [contoh: penjelasan error Polars atau review dokumentasi].
->
-> Verifikasi yang dilakukan: [contoh: menjalankan ulang kode, memeriksa dokumentasi resmi, dan memahami setiap cell].
+> Bagian yang dibantu: membantu mencari dataset pengganti dan menilai
+> kecocokannya (menyisir ratusan kandidat di Hugging Face, membandingkan
+> ukuran, jumlah baris, dan kelengkapan kolomnya, lalu memilih kumpulan berita
+> politik Indonesia karena ada kolom tanggal dan kota) serta membantu menyusun
+> pemotongan data pada `src/download_dataset.py`.
+
+> Verifikasi yang dilakukan: membuka halaman dataset di Hugging Face dan
+> memeriksa penampil datanya, menghitung sendiri jumlah baris dan ukuran
+> berkas hasil unduhan, mengukur kecepatan baca Parquet jarak jauh lalu
+> membandingkannya dengan unduhan langsung sebelum menentukan cara unduh,
+> menjalankan notebook dari awal dan memeriksa tiap output, serta mencocokkan
+> jumlah baris dataset dengan syarat tugas yaitu lebih dari 1 juta baris.

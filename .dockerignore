@@ -1,0 +1,19 @@
+# Jangan ikutkan berkas yang besar atau bisa dibuat ulang.
+# Data mentah dan cache petaknya di-mount lewat -v saat container dijalankan,
+# jadi tidak perlu masuk ke dalam image.
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+
+.git/
+.gitignore
+
+data/raw/
+data/processed/
+output/
+
+.ipynb_checkpoints/
+*.ipynb_checkpoints/
+
+*.part
