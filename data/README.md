@@ -140,6 +140,30 @@ Mengunduh berkas utuh secara paralel jauh lebih cepat, sekitar 7 MB per detik.
 Karena itu berkas asli diunduh penuh lebih dulu, baru disusun tabelnya secara
 lokal.
 
+## Hasil Pembersihan (Milestone 2)
+
+`notebooks/02_data_cleaning.ipynb` membaca tabel analisis di atas lalu menulis
+`data/processed/berita_politik_bersih.parquet`.
+
+| | |
+|---|---|
+| Baris | 640.000 (tidak ada yang dibuang) |
+| Kolom | 16 (10 asli + 6 turunan) |
+| Ukuran | 568,5 MB |
+
+Kolom turunan yang ditambahkan: `tanggal_terbit` (datetime), `tanggal_valid`
+(boolean), `panjang_teks`, `panjang_judul`, `is_outlier_teks`, dan
+`panjang_teks_bersih`.
+
+Ringkasan perubahannya:
+
+| Perubahan | Jumlah |
+|---|---|
+| `news_author` kosong diisi `Tanpa Penulis` | 31.931 |
+| Tanggal tidak valid (kosong atau di luar 2015-2026) | 16.740 |
+| Artikel ditandai outlier panjang (di atas 50.000 karakter) | 4 |
+| Baris dihapus | 0 |
+
 ## Temuan Awal Sebelum Pembersihan
 
 Angka di bawah ini hasil profiling di `notebooks/01_data_profiling.ipynb`,
